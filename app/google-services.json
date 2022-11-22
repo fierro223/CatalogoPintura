@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533128470193",
+    "project_id": "login-de-kotlin-690eb",
+    "storage_bucket": "login-de-kotlin-690eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533128470193:android:1c048ade9c1640bf364c90",
+        "android_client_info": {
+          "package_name": "com.example.catalogopintura"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533128470193-lhvvpd6ka443a6n5kl15trb3b8vju69b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxkOHkdQ2Pc5-EV6NuM08jBG9XUfFt_jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533128470193-lhvvpd6ka443a6n5kl15trb3b8vju69b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

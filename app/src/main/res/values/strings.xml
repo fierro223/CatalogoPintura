@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CatalogoPintura</string>
+    <string name="contrasenia">Contrasenia</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="nombre_de_usuario">Nombre de Usuario</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="usuario">Usuario</string>
+</resources>
