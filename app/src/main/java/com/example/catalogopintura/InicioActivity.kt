@@ -4,16 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 lateinit var service: ApliService
 class InicioActivity : AppCompatActivity() {
+    var imag:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vista2)
@@ -21,7 +19,7 @@ class InicioActivity : AppCompatActivity() {
         val cerrar = findViewById<Button>(R.id.Btocerrar)
         val cliImagen=findViewById<ImageView>(R.id.ImVPintura)
         val retrofit:Retrofit=Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl("https://collectionapi.metmuseum.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         service=retrofit.create(ApliService::class.java)
@@ -43,23 +41,29 @@ class InicioActivity : AppCompatActivity() {
         val buscardor=findViewById<EditText>(R.id.EdtBuscar)
         val titulo = findViewById<TextView>(R.id.TxvTitulo)
         val imagen : ImageView = findViewById (R.id.ImVPintura)
-        var posts:Posts?=null
+        var data:Data?=null
 
-        service.getPostByid(buscardor.text.toString().toInt()).enqueue((object :Callback<Posts>{
+        service.getPostByid(buscardor.text.toString().toInt()).enqueue((object:Callback<Data>{
 
-            override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
-                posts=response.body()
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                data=response.body()
+                if (data?.primaryImageSmall==""){
+                    titulo.text="No se Encontro imagen"
+                    Picasso.get()
+                        .load("https://cdn.pixabay.com/photo/2016/01/20/18/35/x-1152114_1280.png")
+                        .into(imagen)
+                }else {
 
-                //.text=posts?.id.toString()
-                Picasso.get()
-                    .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8xujxeDqBwumIYPrfkSzm9k31o3O-TWKVtWyi_zEMCoIoycmvMgGnU6rxRt6QmWzIU&usqp=CAU")
-                    .into(imagen)
-                titulo.text=posts?.thumbnailUrl
-                titulo.text=posts?.id.toString()
-                Log.i("",Gson().toJson(posts))
+                    Picasso.get()
+                        .load(data?.primaryImageSmall.toString())
+                        .into(imagen)
+                    imag = data?.primaryImageSmall.toString()
+                    titulo.text = data?.title.toString()
+                    Log.i("", Gson().toJson(data))
+                }
             }
 
-            override fun onFailure(call: Call<Posts>, t: Throwable) {
+            override fun onFailure(call: Call<Data>, t: Throwable) {
                 t.printStackTrace()
             }
 
@@ -72,10 +76,8 @@ class InicioActivity : AppCompatActivity() {
         txtnombre.text=cred2!!.nombreCredencial
     }
     fun cambiar(){
-        val imagen : ImageView = findViewById (R.id.ImVPintura)
-        val cred4=Credencial(3,"","",imagen.toString())
         val intent = Intent(this, VistaGlobalActivity::class.java)
-        intent.putExtra("imagen1", cred4)
+        intent.putExtra("imagen1", imag)
         startActivity(intent)
     }
 

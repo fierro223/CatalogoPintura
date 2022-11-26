@@ -9,17 +9,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class VistaGlobalActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vista_global)
-        val retrofit:Retrofit=Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        service=retrofit.create(ApliService::class.java)
+
         val imagenGrande: ImageView =findViewById(R.id.ImvGrande)
-        val imagen1 : Credencial?=intent.getParcelableExtra("imagen1")
-        var imagent=imagenGrande.toString()
+
+        val imagen1 :String?=intent.getStringExtra("imagen1")
+        Picasso.get()
+            .load(imagen1)
+            .into(imagenGrande)
         imagenGrande.setOnClickListener{
             volver()
         }
