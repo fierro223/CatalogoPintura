@@ -20,17 +20,7 @@ class VistaGlobalActivity : AppCompatActivity() {
         Picasso.get()
             .load(imagen1)
             .into(imagenGrande)
-        imagenGrande.setOnClickListener{
-            volver()
-        }
-
 
     }
-    fun volver(){
-        val intent = Intent(this,InicioActivity::class.java)
-        startActivity(intent)
-    }
-
-
 
 }
